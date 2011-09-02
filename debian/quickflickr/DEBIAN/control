@@ -1,0 +1,15 @@
+Package: quickflickr
+Version: 1.2.0
+Architecture: armel
+Maintainer: Marko Mattila <marko.mattila@d-pointer.com>
+Installed-Size: 576
+Depends: applauncherd-launcher, libc6 (>= 2.4), libgcc1 (>= 1:4.1.1), libqt4-declarative (>= 4.7.4~git20110516), libqt4-network (>= 4.7.4~git20110516), libqt4-xml (>= 4.7.4~git20110516), libqtcore4 (>= 4.7.4~git20110516), libqtgui4 (>= 4.7.4~git20110516), libqtwebkit4, libstdc++6 (>= 4.4.0)
+Section: user/other
+Priority: optional
+Homepage: http://www.d-pointer.com
+Description: QuickFlickr is a Flickr client for N9
+ QuickFlickr is a cool and a bit different Flickr client, which you can use to check the latest uploads from your friends, rencent activity, your own and contacts' photostreams, favorites and also add and view comments.
+ QuickFlickr is brought to you by d-pointer.
+Maemo-Display-Name: QuickFlickr
+Maemo-Icon-26: iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEwAACxMBAJqcGAAABF1JREFUaIHlWm1oW1UYfk7TQkt1066j3bLWKMOt1QqTfjiLJIRuov5I+0ehRDqndugmDIQKU2EKIgjiEDuYwobLnN0YtHXdJoU26crcqFDR6mZdadrYMlvdnO2Spl3b1x9N1uTmnnPPvbmZKT5wf+S+H+d57jnvuYf7Bvg/gohcROQl8+AlIleqSbeaSFgLrWYSt5O5T1sWXiKya/FjGuT9AGxmPQyDGGGMPcgzZqjdJKIGIiL89+QBwBaZkQY1o+oMRMinHRhjCXwTZiCybDQx03sRE+5GDFny4i5/4cOYcDeawTcBatyYwsEOwKeVaKb3IsYdzwl9cuzVsHaf1klRCg7GWE/0h3IG9stkmDp0RNNnpueCLlY6sD/2xx0BtLT3OmQyTH99SmqkyZffkKclDwfFvCfuLCE9hTtkyZPyy1xXANvYFV3sZBEtaNVt1CzMT/6VyvQAIgIoReeQ7MrHU5EWwDLn6Azs1RNsWZsv5bf69Vd0kTpR58Fbj51BVf4oTtR5MNDcLXLfC0RqQO+La8LdKFXIGxduSOc8+9Ix1Hvq4+65bJfw5dCT3BjGGDNUAwXHPkeOvVroU9hyWDrfQHN3AnkAaB95Ag0bv9NOkMyRcWLnHvJbN9PVrHz6vXo7TX11UneOprIOWm1Z4F48AAaXkNmoyh/F4M0irv3mvPpCMbyEzIZj/c+GY9NCgHtXDtfmsl0SxqaFgLLdThTfM6lqe+GpYe0EssXm2dFJ+8rPcYutIi9Anh2dtHCbX3gitNQepaayDqpcM0IttUfpp8+6hP66BNQV9wt3CuV10HXWkAg9ACR2oek/gvjiRS/e9z6ra1nkZoXxq59wb2Gurjg9YNETnUiANSeE4O1sQwPkZoXxztM9eK3tGYMUxdAU8HbFt2j+YXvSA90IAxmZ5u8Xmu8BM8gDwPFXu0zJowaugO6P+kwb5NNvNgvt4b5+DK/akPCBYHjVBoT7+oWxXAHtwxXG2Krgt3+sXFugtBJjW2uwGAwl2BaDIYxtrUGwrYMbzxUweCX1x6O5gcuYGxzS9Pv7k4OYG7isauMWcUHuImZnk6W4DLUD2UjxI5gfvyYVn2ldB1vgl7h7wiJes1YnQwOQJS/yjQrwKQ3FDxihdFfhA5YFHFBan68XfrhOBxwAIgIYY+1K685d5gnYvaXTtFxRRDnfleN0yaOWlOWOFdCmNHZ0JT8LTuuPcB/Zpmq778090nkUvglcAQCk0kr68L1FXcfo2OvjmtOaR+LRkgq6mnG/8LrVGpfHy1VJS/2wOMzOGhOxPjtIU9duaQqYPtVOgSonl3ygyqkMEffNiMivNlCvT17EvvJzmsSVCHnP0/i2WvIXlZK/qJSuv/sBhbznlW7iBkeMCOE54vAhwsnjhMAocP1PYEs5sKmEwfXQ93A2VQofUDJQazGpgiJNvjSDfJMvRsjKbLNGEQl0QKJvlgL4sNQP45LXBVqpfzXgiFl5f/ZIV/wLsvcFFI09Pl4AAAAASUVORK5CYII=
+Aegis-Manifest: empty

@@ -1,0 +1,63 @@
+#include "utils.h"
+#include <QApplication>
+#include <QDesktopWidget>
+#include <QDateTime>
+#include <QtDebug>
+
+Utils * Utils::instance()
+{
+    static Utils instance;
+    return &instance;
+}
+
+
+int Utils::displayWidth() const
+{
+    return m_displaySize.width();
+}
+
+int Utils::displayHeight() const
+{
+    return m_displaySize.height();
+}
+
+QString Utils::formattedTime( qint64 seconds, const QString & format) const
+ {
+    QDateTime dt = QDateTime::fromTime_t(seconds);
+    return dt.toString(format);
+ }
+
+int Utils::lastPageIndex(const QString & xml)
+{
+    // This is ugly, but it's damn easy to get just a single value from xml
+
+    QString key("pages=");
+    int index = xml.indexOf(key) +1;
+    if ( index < 0){
+        return -1;
+    }
+
+    int startIndex = index + key.length();
+    int endIndex = xml.indexOf("\"", startIndex+1);
+    QString returnValue = xml.mid(startIndex, endIndex-startIndex);
+    return returnValue.toInt();
+
+}
+
+Utils::Utils(QObject *parent) :
+    QObject(parent)
+{
+#if defined(Q_WS_MAEMO_5)
+        m_displaySize.setWidth( qApp->desktop()->screenGeometry().size().height());
+        m_displaySize.setHeight( qApp->desktop()->screenGeometry().size().width());
+        return;
+#endif
+#if defined(Q_WS_MAC) || defined(Q_WS_X11)
+        m_displaySize.setWidth(360);
+        m_displaySize.setHeight(640);
+#else
+    m_displaySize = qApp->desktop()->screenGeometry().size();
+#endif
+}
+
+
