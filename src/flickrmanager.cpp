@@ -30,8 +30,8 @@
 #include <QVariant>
 #include <QtDebug>
 
-#define KEY "b4988020794fcf538ef1bd0e333ee5b6"
-#define SECRET "cbd1ed5706d20a91"
+#define KEY ""
+#define SECRET ""
 
 class FlickrManagerPrivate{
 public:
