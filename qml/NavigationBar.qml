@@ -57,6 +57,10 @@ Item{
              strId: "favorites"
          }
          ListElement {
+             name: "Search"
+             strId: "search"
+         }
+         ListElement {
              name: "Settings & About"
              strId: "settings"
          }

@@ -46,6 +46,7 @@ BasePage{
         anchors.top: photosList.top
         anchors.topMargin: settings.hugeMargin
         onTextShowed: detailsLayer.hide()
+        topLoadingIndicator: true
     }
     LoadingIndicatorBox{
         id: bottomIndicator
@@ -54,6 +55,7 @@ BasePage{
         anchors.bottom: photosList.bottom
         anchors.bottomMargin: settings.hugeMargin
         onTextShowed: detailsLayer.hide()
+        topLoadingIndicator: false
     }
 
     // This is the main list view for showing fullscreen images

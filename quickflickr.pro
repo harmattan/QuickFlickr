@@ -39,7 +39,8 @@ HEADERS += \
     $$KQOAUTH_DIR/kqoauthauthreplyserver.h \
     $$KQOAUTH_DIR/kqoauthauthreplyserver_p.h \
     $$KQOAUTH_DIR/kqoauthutils.h \
-    $$KQOAUTH_DIR/kqoauthrequest_xauth_p.h
+    $$KQOAUTH_DIR/kqoauthrequest_xauth_p.h \
+    src/settings.h
 
 
 SOURCES += \
@@ -48,7 +49,8 @@ SOURCES += \
      $$KQOAUTH_DIR/kqoauthutils.cpp \
      $$KQOAUTH_DIR/kqoauthauthreplyserver.cpp \
      $$KQOAUTH_DIR/kqoauthrequest_1.cpp \
-     $$KQOAUTH_DIR/kqoauthrequest_xauth.cpp
+     $$KQOAUTH_DIR/kqoauthrequest_xauth.cpp \
+    src/settings.cpp
 
 
 DEFINES += KQOAUTH
@@ -126,7 +128,8 @@ OTHER_FILES += \
     qml/PolaroidImage.qml \
     qml/AvatarWithTextDelegate.qml \
     qml/PatchIcon.qml \
-    qml/LoadingIndicatorBox.qml
+    qml/LoadingIndicatorBox.qml \
+    qml/SearchView.qml
 
 
 OTHER_FILES += \
@@ -148,3 +151,6 @@ qtcAddDeployment()
 !exists("kqoauth/.git/config"){
     system("git clone git@gitorious.org:kqoauth/kqoauth.git")
 }
+
+
+

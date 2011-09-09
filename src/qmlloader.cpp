@@ -26,26 +26,21 @@
 #include <QDeclarativeEngine>
 #include <QHBoxLayout>
 #include <QtDebug>
-
+#include "settings.h"
 
 
 QmlLoader::QmlLoader():
         QDeclarativeView()       
 {
-
-
-    setAttribute(Qt::WA_LockPortraitOrientation);
     // Setup the C++ side for providing data for QML
     m_flickrManager = new FlickrManager();    
-        
+    m_settings = new Settings();
     
     // Expose the C++ interface to QML
     engine()->rootContext()->setContextProperty("flickrManager", m_flickrManager );
-    engine()->rootContext()->setContextProperty("mainWindow", this );
+    engine()->rootContext()->setContextProperty("qfStore", m_settings );
     engine()->rootContext()->setContextProperty("utils", Utils::instance() );
 
-    // Load the main QML component which constructs the whole UI from other
-    // QML components    
     setSource(QUrl("qrc:///qml/qml/QuickFlickrMain.qml"));
     m_flickrManager->activate();
 }
@@ -53,7 +48,9 @@ QmlLoader::QmlLoader():
 QmlLoader::~QmlLoader()
 {
     delete m_flickrManager;
-    m_flickrManager = 0;
+    m_flickrManager = 0;    
+    delete m_settings;
+    m_settings = 0;
 }
 
 

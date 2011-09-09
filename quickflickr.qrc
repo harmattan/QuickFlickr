@@ -54,6 +54,7 @@
         <file>qml/AvatarWithTextDelegate.qml</file>
         <file>qml/PatchIcon.qml</file>
         <file>qml/LoadingIndicatorBox.qml</file>
+        <file>qml/SearchView.qml</file>
     </qresource>
     <qresource prefix="/">
         <file>gfx/back.png</file>

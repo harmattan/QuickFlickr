@@ -30,8 +30,8 @@
 #include <QVariant>
 #include <QtDebug>
 
-#define KEY ""
-#define SECRET ""
+#define KEY "b4988020794fcf538ef1bd0e333ee5b6"
+#define SECRET "cbd1ed5706d20a91"
 
 class FlickrManagerPrivate{
 public:
@@ -225,43 +225,35 @@ void FlickrManager::authenticationDone()
 void FlickrManager::methodCallDone(const QString & reply, int callId)
 {
     switch(callId){
-    case GetContactsPublicPhotos:
-        //qDebug() << reply;
+    case GetContactsPublicPhotos:        
         emit contactsUploadsUpdated(reply);
         break;
 
-    case GetContacts:
-        //qDebug() << reply;
+    case GetContacts:        
         emit contactsUpdated(reply);
         break;
 
-    case GetPhotosOfContact:
-        //qDebug() << reply;
+    case GetPhotosOfContact:        
         emit photostreamUpdated(reply);
         break;
 
-    case GetRecentActivity:
-        //qDebug() << reply;
+    case GetRecentActivity:        
         emit recentActivityUpdated(reply);
         break;
 
-    case GetComments:
-        //qDebug() << reply;
+    case GetComments:        
         emit commentsUpdated(reply);
         break;
 
-    case AddComment:
-        Q_UNUSED(reply);
+    case AddComment:        
         emit commentAdded();
         break;
 
-    case AddFavorite:
-        Q_UNUSED(reply);
+    case AddFavorite:        
         // No specific response
         break;
 
-    case GetFavorites:
-        qDebug() << reply;
+    case GetFavorites:        
         emit favoritesUpdated(reply);
         break;
 
@@ -269,25 +261,35 @@ void FlickrManager::methodCallDone(const QString & reply, int callId)
         emit favoriteRemoved();
         break;
 
-    case GetUserInfo:
-        //qDebug()<< reply;
+    case GetUserInfo:        
         emit userInfoUpdated(reply);
         break;
-    case GetPhotoInfo:
-        //qDebug()<< xmlData;
+
+    case GetPhotoInfo:        
         emit photoInfoUpdated(reply);
         break;
 
-    case GetPhotoFavorites:
-        //qDebug() << reply;
+    case GetPhotoFavorites:        
         emit photoFavoritesUpdated(reply);
         break;
 
-    default:
-        {
-                qWarning() << "Unknown Request!";
+    case SearchTags:
+        //qDebug() << reply;
+        emit tagSearchUpdated(reply);
+        break;
 
-        }
+    case SearchFreeText:
+        //qDebug() << reply;
+        emit textSearchUpdated(reply);
+        break;
+
+    case GetInterestingness:
+        qDebug() << reply;
+        emit interestingnessUpdated(reply);
+        break;
+
+    default:        
+        qWarning() << "Unknown Request!";
         break;
     }
 
@@ -307,6 +309,45 @@ void FlickrManager::setVerifier(const QString & verifier )
     d->m_qtFlickr->setVerifier(verifier);
 }
 
+void FlickrManager::searchTags(const QString & tagsList, int page, bool ownPhotosOnly)
+{
+    Q_D(FlickrManager);
+    FlickrParameters params;
+    params.insert("tags", tagsList);
+    params.insert("per_page", "20");
+    params.insert("page", QString::number(page));
+    params.insert("extras", "url_s,owner_name,url_m,url_s,url_z,o_dims,media");
+    d->m_qtFlickr->callMethod("flickr.photos.search", ownPhotosOnly, SearchTags,  params );
+}
+
+void FlickrManager::searchFreeText( const QString & text, int page, bool ownPhotosOnly)
+{
+    Q_D(FlickrManager);
+    FlickrParameters params;
+    params.insert("text", text);
+    params.insert("per_page", "20");
+    params.insert("page", QString::number(page));
+    params.insert("extras", "url_s,owner_name,url_m,url_s,url_z,o_dims,media");
+    d->m_qtFlickr->callMethod("flickr.photos.search", ownPhotosOnly, SearchFreeText,  params );
+}
+
+void FlickrManager::searchLocation(int longnitude, int latitude, int page)
+{
+    Q_UNUSED(longnitude);
+    Q_UNUSED(latitude);
+    Q_UNUSED(page);
+}
+
+void FlickrManager::getInterestingness(int page)
+{
+    Q_D(FlickrManager);
+    FlickrParameters params;
+    params.insert("extras", "url_s,owner_name,url_m,url_s,url_z,o_dims,media");
+    params.insert("per_page","20");
+    params.insert("page", QString::number(page));
+    d->m_qtFlickr->callMethod("flickr.interestingness.getList", false, GetInterestingness,  params );
+
+}
 
 
 

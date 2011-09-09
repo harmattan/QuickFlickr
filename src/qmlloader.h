@@ -25,6 +25,7 @@
 
 
 class FlickrManager;
+class Settings;
 class QmlLoader: public QDeclarativeView
 {
     Q_OBJECT
@@ -34,6 +35,7 @@ public:
     
 private:
     FlickrManager    * m_flickrManager;    
+    Settings * m_settings;
 };
 
 #endif // QMLLOADER_H

@@ -45,6 +45,10 @@ public:
         GetUserInfo,
         GetPhotoInfo,
         GetPhotoFavorites,
+        SearchTags,
+        SearchFreeText,
+        SearchLocation,
+        GetInterestingness,
         RequestCount
 
     };
@@ -91,6 +95,14 @@ public:
 
     Q_INVOKABLE void setVerifier(const QString & verifier );
 
+    Q_INVOKABLE void searchTags(const QString & tagsList, int page, bool ownPhotosOnly);
+
+    Q_INVOKABLE void searchFreeText( const QString & text, int page, bool ownPhotosOnly);
+
+    Q_INVOKABLE void searchLocation(int longnitude, int latitude, int page);
+
+    Q_INVOKABLE void getInterestingness(int page);
+
 Q_SIGNALS:
     void authenticationRequired();
     void proceed();        
@@ -104,7 +116,10 @@ Q_SIGNALS:
     void favoriteRemoved();
     void userInfoUpdated( const QString & xml);
     void photoInfoUpdated( const QString & xml);
-    void photoFavoritesUpdated(const QString & xml);
+    void photoFavoritesUpdated( const QString & xml);
+    void tagSearchUpdated( const QString & xml);
+    void textSearchUpdated( const QString & xml);
+    void interestingnessUpdated( const QString & xml);
     void verifierRequired();
     void verificationFailure();
 

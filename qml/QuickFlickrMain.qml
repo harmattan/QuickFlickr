@@ -92,16 +92,25 @@ PageStackWindow {
                          }
 
                          appWindow.showPage(contactsview,3);
-                     }
+                     }else
                      if ( id == "favorites" ){
                          if (appWindow.pageStack.currentPage != favestreamviewer){
                             flickrManager.getFavorites(24, 1);
                          }
                          appWindow.showPage(favoritesview,4);
+                     }else
+                     if ( id == "search" ){
+
+                         if (appWindow.pageStack.currentPage != searchview &&
+                             appWindow.pageStack.currentPage != searchviewer){
+                             searchview.runSearch(false);
+                         }
+
+                         appWindow.showPage(searchview,5);
                      }
                      else
                      if ( id == "settings" ){
-                        appWindow.showPage(settingsview,5);
+                        appWindow.showPage(settingsview,6);
                      }
 
 
@@ -117,6 +126,8 @@ PageStackWindow {
             source: "qrc:///gfx/Splash.png"; anchors.centerIn: parent
         }
     }
+
+
 
     AuthenticationView{
         id: authenticationview
@@ -245,6 +256,52 @@ PageStackWindow {
         }
     }
     // End of favorites stuff
+
+    SearchView{
+        id: searchview
+        onThumbnailClicked: {
+            searchviewer.currentItemIndex = index;
+            flickrManager.getPhotoInfo(photoId);
+            appWindow.showPage(searchviewer,5);
+        }
+
+        onCurrentPageIndexChanged: {
+            if ( searchviewer.currentPageIndex != currentPageIndex){
+                searchviewer.currentPageIndex = currentPageIndex;
+            }
+        }
+    }
+    PhotoViewerView{
+        id: searchviewer
+
+        onCurrentPageIndexChanged: {
+            // Update photostreamview's current page index
+            if (searchview.currentPageIndex != currentPageIndex ){
+                searchview.currentPageIndex = currentPageIndex;
+            }
+        }
+
+        onLoadNextImages: {
+            ++currentPageIndex;
+            startIndex = 0;
+            searchview.runSearch(false);
+        }
+
+        onLoadPreviousImages: {
+            if ( currentPageIndex > 1){
+                --currentPageIndex;
+                startIndex = 19;
+                searchview.runSearch(false);
+            }
+        }
+
+        Connections{
+            target: flickrManager
+            onTagSearchUpdated: { searchviewer.xml = xml; }
+            onTextSearchUpdated: { searchviewer.xml = xml;}
+        }
+    }
+
 
     SettingsView{
         id: settingsview

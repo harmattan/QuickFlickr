@@ -1,3 +1,23 @@
+/**
+ * QuickFlickr - FlickrClient for mobile devices.
+ *
+ * Author: Marko Mattila (marko.mattila@d-pointer.com)
+ *         http://www.d-pointer.com
+ *
+ *  QuickFlickr is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU Lesser General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  QuickFlickr is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU Lesser General Public License for more details.
+ *
+ *  You should have received a copy of the GNU Lesser General Public License
+ *  along with QuickFLickr.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 #include "flickroauth.h"
 #include <QCoreApplication>
 #include <QStringList>
@@ -39,8 +59,7 @@ void FlickrOAuthPrivate::onRequestReady(QByteArray response,int id)
 }
 
 void FlickrOAuthPrivate::onAuthenticationDone(QByteArray response)
-{
-    qDebug() << "** " << Q_FUNC_INFO << "**" << m_authStep;
+{    
     Q_Q(FlickrOAuth);
     switch(m_authStep){
     case 0:
@@ -62,14 +81,12 @@ void FlickrOAuthPrivate::onAuthenticationDone(QByteArray response)
             qWarning() << "Failed to open url: " << openWebPageUrl;
         }
 
-        qDebug() << "Token: " << m_oauth_token << "Secret: " << m_oauth_token_secret << "Confirmed: " << m_oauth_callback_confirmed;
         emit q->verifierRequired();
 
     }
     break;
     case 1:
-    {
-        qDebug() << "Received authentication tokens: " << response;        
+    {        
         QMultiMap<QString, QString> params =  createTokensFromResponse(response);
 
         QString problem = params.value("oauth_problem");
@@ -98,7 +115,6 @@ void FlickrOAuthPrivate::onAuthenticationDone(QByteArray response)
         disconnect(m_oauthManager, SIGNAL(requestReady(QByteArray)),
                     this, SLOT(onAuthenticationDone(QByteArray)));
 
-        qDebug() << "Authentication is done now...";
         emit q->authenticationDone();
         m_authStep = -1;
 
@@ -113,14 +129,12 @@ void FlickrOAuthPrivate::onAuthenticationDone(QByteArray response)
 QMultiMap<QString, QString> FlickrOAuthPrivate::createTokensFromResponse(QByteArray reply)
 {
     QMultiMap<QString, QString> result;
-    QString replyString(QByteArray::fromPercentEncoding(reply));
-    qDebug() << "Reply string for split: " << replyString;
+    QString replyString(QByteArray::fromPercentEncoding(reply));    
 
     QStringList parameterPairs = replyString.split('&', QString::SkipEmptyParts);
     foreach (const QString &parameterPair, parameterPairs) {
         QStringList parameter = parameterPair.split('=');
-        result.insert(parameter.value(0), parameter.value(1));
-        qDebug() << "Inserting: " << parameter.value(0) << " Value: " << parameter.value(1);
+        result.insert(parameter.value(0), parameter.value(1));        
     }
     return result;
 }
@@ -137,7 +151,7 @@ void FlickrOAuthPrivate::setVerifier(const QString &verifier)
     QString tmpVerifier(verifier);
     tmpVerifier = tmpVerifier.remove('-');
     tmpVerifier = tmpVerifier.remove(' ').trimmed();
-    qDebug() << Q_FUNC_INFO << tmpVerifier;
+
     m_oauthRequest->clearRequest();
     m_oauthRequest->initRequest(KQOAuthRequest::AccessToken, QUrl("http://www.flickr.com/services/oauth/access_token"));
     m_oauthRequest->setConsumerKey(m_key);
@@ -180,8 +194,7 @@ FlickrOAuth::~FlickrOAuth()
 
 void FlickrOAuth::authenticate()
 {
-    Q_D(FlickrOAuth);   
-    qDebug() << Q_FUNC_INFO << "Starting to authenticate";
+    Q_D(FlickrOAuth);       
     connect(d->m_oauthManager, SIGNAL(requestReady(QByteArray)),
                 d, SLOT(onAuthenticationDone(QByteArray)), Qt::UniqueConnection);
 
@@ -206,7 +219,6 @@ bool FlickrOAuth::removeAuthentication()
     d->m_oauthSettings.setValue(NSID,"");
     d->m_oauthSettings.setValue(USERNAME,"");
 
-    qDebug() << Q_FUNC_INFO << "Authentication removed";
     return !isAuthenticated();
 }
 
@@ -218,8 +230,10 @@ bool FlickrOAuth::callMethod(const QString &method, bool useUserId,  int callId,
         qWarning() << "Empty method name. Can't continue...";
         return false;
     }
-    qDebug() << Q_FUNC_INFO << method;
+
+    qDebug() << "X 1";
     Q_D(FlickrOAuth);
+    qDebug() << "X 2";
     d->m_oauthRequest->clearRequest();
     d->m_oauthRequest->initRequest(KQOAuthRequest::AuthorizedRequest, QUrl("http://api.flickr.com/services/rest/"));
     d->m_oauthRequest->setTimeout(0);
@@ -227,7 +241,7 @@ bool FlickrOAuth::callMethod(const QString &method, bool useUserId,  int callId,
     d->m_oauthRequest->setConsumerSecretKey(d->m_secret);
     d->m_oauthRequest->setToken(d->m_oauthSettings.value(OAUTH_TOKEN).toString());
     d->m_oauthRequest->setTokenSecret(d->m_oauthSettings.value(OAUTH_TOKEN_SECRET).toString());
-
+    qDebug() << "X 3";
      KQOAuthParameters parameters;
     parameters.insert("method", method);
 
@@ -235,8 +249,7 @@ bool FlickrOAuth::callMethod(const QString &method, bool useUserId,  int callId,
          QMapIterator<QString, QString> i(params);
          while (i.hasNext()) {
              i.next();
-             parameters.insert(i.key(), i.value());
-             qDebug() << "Key: " << i.key() << " Value: " << i.value();
+             parameters.insert(i.key(), i.value());             
          }
     }
 
@@ -256,8 +269,7 @@ bool FlickrOAuth::isAuthenticated() const
     Q_D(const FlickrOAuth);
     QString oauth_token = d->token(OAUTH_TOKEN);
     QString oauth_token_secret = d->token(OAUTH_TOKEN_SECRET);
-     QString nsid = d->token(NSID);
-    qDebug() << Q_FUNC_INFO << "NSID: "  << nsid << "Token: " << oauth_token << "Secret: " << oauth_token_secret;
+    QString nsid = d->token(NSID);
 
     return !(oauth_token.isEmpty() || oauth_token_secret.isEmpty() || nsid.isEmpty());
 }

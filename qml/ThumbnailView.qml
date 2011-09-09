@@ -85,12 +85,14 @@ Item{
         scrollArea: grid
         text:  "Loading previous"
         anchors.top: grid.top
+        topLoadingIndicator: true
     }
     LoadingIndicatorBox{
         id: bottomIndicator
         scrollArea: grid
         text:  "Loading next"
         anchors.bottom: grid.bottom
+        topLoadingIndicator: false
     }
 
     GridView{

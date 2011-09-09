@@ -5,11 +5,12 @@ Rectangle{
     property alias text: text.text
     property int contentY: scrollArea.contentY
     signal textShowed()
-    height:  settings.loadMoreThreshold//Math.abs(scrollArea.contentY)
+    height:  settings.loadMoreThreshold
     width:  scrollArea.width
     color: "#11111101"
     opacity: 0
     scale:  0
+    property bool topLoadingIndicator: true
 
     Text{
         id: text
@@ -25,17 +26,23 @@ Rectangle{
     onContentYChanged: {        
         var bottomThreshold = Math.abs(scrollArea.contentHeight - scrollArea.height) + settings.loadMoreThreshold;
 
-        if (contentY >= bottomThreshold){
+        if (!topLoadingIndicator && contentY >= bottomThreshold){
             opacity=1.0;
             scale = 1;
+            console.log("Showing bottom");
+            return;
         }
-        if (contentY <= -settings.loadMoreThreshold){
+        if (topLoadingIndicator && contentY <= -settings.loadMoreThreshold){
             opacity= 1.0;
             scale = 1;
+            console.log("Showing top");
+            return;
         }
         if ( -settings.loadMoreThreshold < contentY &&  contentY < bottomThreshold ){
             opacity= 0;
             scale = 0;
+            console.log("Hiding...");
+            return;
         }
     }
 

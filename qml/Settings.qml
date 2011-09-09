@@ -41,7 +41,7 @@ Item{
     property int smallFontSize: 16
     property int mediumFontSize: 20
     property int largeFontSize: 28
-    property int hugeFontSize: 68
+    property int hugeFontSize: 65
     property color fontColor: "white"
 
     // Margins

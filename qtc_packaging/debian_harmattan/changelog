@@ -1,3 +1,10 @@
+quickflickr (1.3.0) unstable; urgency=low
+
+  * Fixed a bug in loading more indicator.
+  * Added a new search view.
+
+ -- Marko Mattila <marko.mattila@d-pointer.com>  Fri, 09 Aug 2011 21:19:56 +0300
+
 quickflickr (1.2.0) unstable; urgency=low
 
   * Fixed a bug in favorites. Now play icon is not shown for all thumbnails
