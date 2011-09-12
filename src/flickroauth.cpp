@@ -43,7 +43,7 @@ FlickrOAuthPrivate::FlickrOAuthPrivate(FlickrOAuth * parent):
     q_ptr(parent),
     m_oauthManager(0),
     m_oauthRequest(0),
-    m_oauthSettings("d-pointer","quickflickr"),
+    m_oauthSettings(),//("d-pointer","quickflickr"),
     m_key(),
     m_secret(),
     m_authStep(-1)
@@ -231,9 +231,8 @@ bool FlickrOAuth::callMethod(const QString &method, bool useUserId,  int callId,
         return false;
     }
 
-    qDebug() << "X 1";
-    Q_D(FlickrOAuth);
-    qDebug() << "X 2";
+
+    Q_D(FlickrOAuth);    
     d->m_oauthRequest->clearRequest();
     d->m_oauthRequest->initRequest(KQOAuthRequest::AuthorizedRequest, QUrl("http://api.flickr.com/services/rest/"));
     d->m_oauthRequest->setTimeout(0);
@@ -241,7 +240,7 @@ bool FlickrOAuth::callMethod(const QString &method, bool useUserId,  int callId,
     d->m_oauthRequest->setConsumerSecretKey(d->m_secret);
     d->m_oauthRequest->setToken(d->m_oauthSettings.value(OAUTH_TOKEN).toString());
     d->m_oauthRequest->setTokenSecret(d->m_oauthSettings.value(OAUTH_TOKEN_SECRET).toString());
-    qDebug() << "X 3";
+
      KQOAuthParameters parameters;
     parameters.insert("method", method);
 

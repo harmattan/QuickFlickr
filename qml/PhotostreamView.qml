@@ -53,7 +53,7 @@ BasePage {
     }
 
     function clearAll()
-    {
+    {        
         photostreamModel.xml = "";
         userInfoModel.xml = "";
         lastPageIndex = 1;
@@ -71,6 +71,10 @@ BasePage {
     function nextPhotostreamPage()
     {
         if (currentPageIndex == lastPageIndex){
+            return;
+        }
+        if (flickrManager.isLiteVersion() && currentPageIndex == 1){
+            flickrManager.notifyNotSupported();
             return;
         }
 

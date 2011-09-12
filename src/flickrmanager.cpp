@@ -18,7 +18,7 @@
  *  along with QuickFLickr.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "flickrmanager.h"
-
+#include "keys.h"
 
 #include <QList>
 #include <QDesktopServices>
@@ -30,8 +30,6 @@
 #include <QVariant>
 #include <QtDebug>
 
-#define KEY "b4988020794fcf538ef1bd0e333ee5b6"
-#define SECRET "cbd1ed5706d20a91"
 
 class FlickrManagerPrivate{
 public:
@@ -106,13 +104,16 @@ void FlickrManager::getLatestContactUploads()
     FlickrParameters params;
     params.insert("extras", "geo, tags, machine_tags, o_dims, views");
     params.insert("single_photo", "true");
+#ifdef LITE
+    params.insert("count", "5" );
+#else
     params.insert("count", "30" );
+#endif
     d->m_qtFlickr->callMethod("flickr.photos.getContactsPublicPhotos", true,  GetContactsPublicPhotos, params);
 }
 
 void FlickrManager::getPhotostream(const QString & userId, int page)
 {
-    // Clear the old stuff    
     Q_D(FlickrManager);    
     FlickrParameters params;
     params.insert("extras", "owner_name,url_m,url_s,url_z,o_dims,media" );
@@ -135,7 +136,11 @@ void FlickrManager::getRecentActivity()
     Q_D(FlickrManager);
     FlickrParameters params;
     params.insert("timeframe","200d");
+#ifdef LITE
+    params.insert("per_page", "5" );
+#else
     params.insert("per_page", "30" );
+#endif
     d->m_qtFlickr->callMethod("flickr.activity.userPhotos", true, GetRecentActivity, params );
 }
 
@@ -311,6 +316,7 @@ void FlickrManager::setVerifier(const QString & verifier )
 
 void FlickrManager::searchTags(const QString & tagsList, int page, bool ownPhotosOnly)
 {
+    qDebug() << "taglist: " << tagsList << ", page: "<< page;
     Q_D(FlickrManager);
     FlickrParameters params;
     params.insert("tags", tagsList);
@@ -350,9 +356,18 @@ void FlickrManager::getInterestingness(int page)
 }
 
 
+bool FlickrManager::isLiteVersion() const
+{
+#ifdef LITE
+    return true;
+#endif
+    return false;
+}
 
-
-
+void FlickrManager::notifyNotSupported()
+{
+    emit featureDisabled();
+}
 
 
 

@@ -36,14 +36,18 @@ BasePage{
             return;
         }
 
+        if ( favoritesModel.count < perPage ){
+            return;
+        }
+
+        if (flickrManager.isLiteVersion() && currentPageIndex == 1){
+            flickrManager.notifyNotSupported();
+            return;
+        }
+
         loading = true;
         favoritesModel.xml = "";
         ++currentPageIndex;
-
-        if ( favoritesModel.count < perPage )
-            return;
-
-        favoritesModel.xml = "";
         flickrManager.getFavorites( perPage, currentPageIndex );
     }
 
@@ -54,10 +58,10 @@ BasePage{
             return;
         }
 
+
         favoritesModel.xml = "";
         loading = true;
         --currentPageIndex;
-        favoritesModel.xml = "";
         flickrManager.getFavorites(perPage, currentPageIndex );
     }
 

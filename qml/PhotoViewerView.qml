@@ -97,6 +97,10 @@ BasePage{
 
             thresholdExceeded = false;
             if ( loadNext && currentPageIndex < lastPageIndex){
+                if (flickrManager.isLiteVersion() && currentPageIndex == 1){
+                    flickrManager.notifyNotSupported();
+                    return;
+                }
                 startIndex = 0;
                 rootPhotoViewerPage.loadNextImages();
                 rootPhotoViewerPage.loading = true;

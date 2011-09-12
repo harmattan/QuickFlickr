@@ -1,5 +1,12 @@
+DEFINES += LITE
 TEMPLATE = app
 TARGET = quickflickr
+
+contains(DEFINES, LITE) {
+    TARGET = quickflickr-lite
+}
+
+
 CONFIG   -= app_bundle
 # enable booster
 CONFIG += qdeclarative-boostable
@@ -8,6 +15,7 @@ QMAKE_LFLAGS += -pie -rdynamic
 
 QT += declarative network xml webkit
 #QMAKE_CXXFLAGS = -O2
+
 
 
 INCLUDEPATH += src kqoauth/src
@@ -40,7 +48,8 @@ HEADERS += \
     $$KQOAUTH_DIR/kqoauthauthreplyserver_p.h \
     $$KQOAUTH_DIR/kqoauthutils.h \
     $$KQOAUTH_DIR/kqoauthrequest_xauth_p.h \
-    src/settings.h
+    src/settings.h \
+    src/keys.h
 
 
 SOURCES += \
@@ -140,8 +149,10 @@ OTHER_FILES += \
     qtc_packaging/debian_harmattan/compat \
     qtc_packaging/debian_harmattan/changelog \
     quickflickr.desktop \
+    quickflickr-lite.desktop \
     quickflickr.svg \
-    quickflickr.png
+    quickflickr.png \
+    quickflickr-lite.png
 
 
 # Please do not modify the following two lines. Required for deployment.
@@ -151,6 +162,13 @@ qtcAddDeployment()
 !exists("kqoauth/.git/config"){
     system("git clone git@gitorious.org:kqoauth/kqoauth.git")
 }
+
+#system(cp gfx/quickflickr.png ./quickflickr.png)
+#contains(DEFINES, LITE) {
+#    system(cp gfx/quickflickr-lite.png ./quickflickr.png)
+#}
+
+
 
 
 

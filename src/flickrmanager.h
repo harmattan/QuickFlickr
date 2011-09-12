@@ -103,7 +103,12 @@ public:
 
     Q_INVOKABLE void getInterestingness(int page);
 
+    Q_INVOKABLE bool isLiteVersion() const;
+
+    Q_INVOKABLE void notifyNotSupported();
+
 Q_SIGNALS:
+    void featureDisabled();
     void authenticationRequired();
     void proceed();        
     void contactsUploadsUpdated(const QString & xml);

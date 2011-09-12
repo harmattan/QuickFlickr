@@ -44,6 +44,10 @@ BasePage{
 
     function clearGrid()
     {
+        if (flickrManager.isLiteVersion()){
+            return;
+        }
+
         searchModel.xml = "";
         loading = true;
         lastPageIndex = 1;
@@ -78,10 +82,14 @@ BasePage{
         if (currentPageIndex == lastPageIndex){
             return;
         }
+        if (flickrManager.isLiteVersion() && currentPageIndex == 1){
+            flickrManager.notifyNotSupported();
+            return;
+        }
 
         clearGrid();
         ++currentPageIndex;
-        runSearch();
+        runSearch(false);
     }
 
     // Function to get previous photostream page
@@ -91,9 +99,10 @@ BasePage{
             return;
         }
 
+
         clearGrid();
         --currentPageIndex;
-        runSearch();
+        runSearch(false);
     }
 
     PhotostreamModel{

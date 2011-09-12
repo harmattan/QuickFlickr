@@ -2,7 +2,7 @@
 
 Settings::Settings(QObject *parent) :
     QObject(parent),
-    m_settings("d-pointer","quickflickr")
+    m_settings()//"d-pointer","quickflickr")
 {
 }
 

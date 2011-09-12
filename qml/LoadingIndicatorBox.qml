@@ -28,20 +28,17 @@ Rectangle{
 
         if (!topLoadingIndicator && contentY >= bottomThreshold){
             opacity=1.0;
-            scale = 1;
-            console.log("Showing bottom");
+            scale = 1;            
             return;
         }
         if (topLoadingIndicator && contentY <= -settings.loadMoreThreshold){
             opacity= 1.0;
-            scale = 1;
-            console.log("Showing top");
+            scale = 1;            
             return;
         }
         if ( -settings.loadMoreThreshold < contentY &&  contentY < bottomThreshold ){
             opacity= 0;
-            scale = 0;
-            console.log("Hiding...");
+            scale = 0;            
             return;
         }
     }

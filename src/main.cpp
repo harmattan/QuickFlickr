@@ -26,6 +26,13 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     QApplication app(argc, argv);
     app.setDoubleClickInterval(500);
 
+    QCoreApplication::setOrganizationName("d-pointer");
+#ifdef LITE
+    QCoreApplication::setApplicationName("quickflickr-lite");
+#else
+    QCoreApplication::setApplicationName("quickflickr");
+#endif
+
     Q_INIT_RESOURCE(quickflickr);
     
     // Simple loader for loading QML files
