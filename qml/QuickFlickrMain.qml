@@ -329,7 +329,7 @@ PageStackWindow {
                    anchors.margins: settings.hugeMargin
                    color: "white"
                    text: "Upgrade to full version to see more photos!"
-                   wrapMode: Label.WordWrap
+                   wrapMode: Text.WordWrap
                    font.pixelSize: settings.mediumFontSize * 1.2
                 }
        }

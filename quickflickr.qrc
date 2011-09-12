@@ -57,25 +57,13 @@
         <file>qml/SearchView.qml</file>
     </qresource>
     <qresource prefix="/">
-        <file>gfx/back.png</file>
-        <file>gfx/background.png</file>
-        <file>gfx/close.png</file>
-        <file>gfx/menu-button.png</file>
-        <file>gfx/minimize.png</file>
-        <file>gfx/toolbar.png</file>
-        <file>gfx/film_strip.png</file>
         <file>gfx/indicator-not-selected.png</file>
         <file>gfx/indicator-selected.png</file>
-        <file>gfx/button-checked.png</file>
-        <file>gfx/button.png</file>
-        <file>gfx/quit.png</file>
         <file>gfx/scrollbar.png</file>
         <file>gfx/loading-1.png</file>
         <file>gfx/loading-2.png</file>
         <file>gfx/loading-3.png</file>
         <file>gfx/loading-4.png</file>
-        <file>gfx/navigationbar-bg.png</file>
-        <file>gfx/button.sci</file>
         <file>gfx/polaroid-bg.png</file>
         <file>gfx/d-pointer-logo.png</file>
         <file>gfx/Splash.png</file>

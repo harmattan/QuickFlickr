@@ -43,7 +43,7 @@ FlickrOAuthPrivate::FlickrOAuthPrivate(FlickrOAuth * parent):
     q_ptr(parent),
     m_oauthManager(0),
     m_oauthRequest(0),
-    m_oauthSettings(),//("d-pointer","quickflickr"),
+    m_oauthSettings(),
     m_key(),
     m_secret(),
     m_authStep(-1)
@@ -53,8 +53,7 @@ FlickrOAuthPrivate::FlickrOAuthPrivate(FlickrOAuth * parent):
 
 void FlickrOAuthPrivate::onRequestReady(QByteArray response,int id)
 {
-    Q_Q(FlickrOAuth);    
-    qDebug() << Q_FUNC_INFO << " req id: " << id;
+    Q_Q(FlickrOAuth);        
     emit q->methodCallDone(QString::fromUtf8(response.data()), id);
 }
 

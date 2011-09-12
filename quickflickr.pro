@@ -1,4 +1,4 @@
-DEFINES += LITE
+#DEFINES += LITE
 TEMPLATE = app
 TARGET = quickflickr
 

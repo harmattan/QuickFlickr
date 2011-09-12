@@ -221,8 +221,7 @@ QString FlickrManager::userName() const
 
 
 void FlickrManager::authenticationDone()
-{
-    qDebug() <<  Q_FUNC_INFO << "Authetication Done";
+{    
     // Now we are authenticated, let's get some stuff from Flickr
     getLatestContactUploads();
 }
@@ -279,17 +278,14 @@ void FlickrManager::methodCallDone(const QString & reply, int callId)
         break;
 
     case SearchTags:
-        //qDebug() << reply;
         emit tagSearchUpdated(reply);
         break;
 
     case SearchFreeText:
-        //qDebug() << reply;
         emit textSearchUpdated(reply);
         break;
 
     case GetInterestingness:
-        qDebug() << reply;
         emit interestingnessUpdated(reply);
         break;
 
@@ -316,7 +312,6 @@ void FlickrManager::setVerifier(const QString & verifier )
 
 void FlickrManager::searchTags(const QString & tagsList, int page, bool ownPhotosOnly)
 {
-    qDebug() << "taglist: " << tagsList << ", page: "<< page;
     Q_D(FlickrManager);
     FlickrParameters params;
     params.insert("tags", tagsList);
