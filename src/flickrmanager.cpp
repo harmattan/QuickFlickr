@@ -315,6 +315,7 @@ void FlickrManager::searchTags(const QString & tagsList, int page, bool ownPhoto
     Q_D(FlickrManager);
     FlickrParameters params;
     params.insert("tags", tagsList);
+    params.insert("tag_mode", "all");
     params.insert("per_page", "20");
     params.insert("page", QString::number(page));
     params.insert("extras", "url_s,owner_name,url_m,url_s,url_z,o_dims,media");

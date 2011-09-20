@@ -1,29 +1,35 @@
-quickflickr (1.3.0) unstable; urgency=low
+quickflickr (1.4.0) unstable; urgency=low
+
+  * Search uses "all" instead of "any" and limits the result more.
+
+ -- Marko Mattila <marko.mattila@d-pointer.com>  Tue, 20 Aug 2011 21:19:56 +0300
+
+quickflickr (1.4.0) unstable; urgency=low
 
   * Fixed a bug in loading more indicator.
   * Added a new search view.
 
  -- Marko Mattila <marko.mattila@d-pointer.com>  Fri, 09 Aug 2011 21:19:56 +0300
 
-quickflickr (1.2.0) unstable; urgency=low
+quickflickr (1.4.0) unstable; urgency=low
 
   * Fixed a bug in favorites. Now play icon is not shown for all thumbnails
 
  -- Marko Mattila <marko.mattila@d-pointer.com>  Fri, 02 Aug 2011 21:19:56 +0300
 
-quickflickr (1.1.0) unstable; urgency=low
+quickflickr (1.4.0) unstable; urgency=low
 
   * Added support for videos.
 
  -- Marko Mattila <marko.mattila@d-pointer.com>  Mon, 29 Aug 2011 21:19:56 +0300
 
-quickflickr (1.0.0) unstable; urgency=low
+quickflickr (1.4.0) unstable; urgency=low
 
   * First release for OVI Store.
 
  -- Marko Mattila <marko.mattila@d-pointer.com>  Mon, 29 Aug 2011 21:19:56 +0300
 
-quickflickr (0.1.0) unstable; urgency=low
+quickflickr (1.4.0) unstable; urgency=low
 
   * Initial Release.
 
