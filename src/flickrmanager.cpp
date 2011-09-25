@@ -285,6 +285,11 @@ void FlickrManager::methodCallDone(const QString & reply, int callId)
         emit textSearchUpdated(reply);
         break;
 
+    case SearchLocation:
+        qDebug() << reply;
+        emit locationSearchUpdated(reply);
+        break;
+
     case GetInterestingness:
         emit interestingnessUpdated(reply);
         break;
@@ -333,11 +338,20 @@ void FlickrManager::searchFreeText( const QString & text, int page, bool ownPhot
     d->m_qtFlickr->callMethod("flickr.photos.search", ownPhotosOnly, SearchFreeText,  params );
 }
 
-void FlickrManager::searchLocation(int longnitude, int latitude, int page)
+void FlickrManager::searchLocation(qreal longitude, qreal latitude, int page)
 {
-    Q_UNUSED(longnitude);
-    Q_UNUSED(latitude);
-    Q_UNUSED(page);
+    qDebug() << "Lat: " << latitude << "Lon: " << longitude;
+    Q_D(FlickrManager);
+    FlickrParameters params;
+    params.insert("per_page", "20");
+    params.insert("page", QString::number(page));
+    params.insert("lon", QString::number(longitude));//"22.28");//
+    params.insert("lat", QString::number(latitude));//"60.45");//
+    params.insert("min_taken_date","2000-01-01+0:00:00");
+    params.insert("radius", "20");
+    params.insert("has_geo", "1");
+    params.insert("extras", "url_s,owner_name,url_m,url_s,url_z,o_dims,media,geo");
+    d->m_qtFlickr->callMethod("flickr.photos.search", false, SearchLocation,  params );
 }
 
 void FlickrManager::getInterestingness(int page)

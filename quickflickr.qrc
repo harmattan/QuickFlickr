@@ -55,6 +55,9 @@
         <file>qml/PatchIcon.qml</file>
         <file>qml/LoadingIndicatorBox.qml</file>
         <file>qml/SearchView.qml</file>
+        <file>qml/LocationView.qml</file>
+        <file>qml/LocationModel.qml</file>
+        <file>qml/MapView.qml</file>
     </qresource>
     <qresource prefix="/">
         <file>gfx/indicator-not-selected.png</file>
@@ -76,5 +79,6 @@
         <file>gfx/views.png</file>
         <file>gfx/play-large.png</file>
         <file>gfx/play-small.png</file>
+        <file>gfx/map_pin.png</file>
     </qresource>
 </RCC>

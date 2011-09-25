@@ -46,7 +46,7 @@ BasePage{
         }
 
         loading = true;
-        favoritesModel.xml = "";
+        //favoritesModel.xml = "";
         ++currentPageIndex;
         flickrManager.getFavorites( perPage, currentPageIndex );
     }
@@ -59,7 +59,7 @@ BasePage{
         }
 
 
-        favoritesModel.xml = "";
+        //favoritesModel.xml = "";
         loading = true;
         --currentPageIndex;
         flickrManager.getFavorites(perPage, currentPageIndex );

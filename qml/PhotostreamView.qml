@@ -27,7 +27,7 @@ BasePage {
     property int lastPageIndex: 1
     property string userid
     property bool loading: true
-    //onStatusChanged: { if (status == PageStatus.Deactivating){ clearAll(); }}
+    //onStatusChanged: { if (status == PageStatus.Inactive){ clearAll(); }}
 
     PhotostreamModel{
         id: photostreamModel
@@ -61,7 +61,7 @@ BasePage {
 
     function clearGrid()
     {
-        photostreamModel.xml = "";        
+        //photostreamModel.xml = "";
         loading = true;
         lastPageIndex = 1;
     }
