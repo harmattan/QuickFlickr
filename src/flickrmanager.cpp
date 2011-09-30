@@ -104,6 +104,7 @@ void FlickrManager::getLatestContactUploads()
     FlickrParameters params;
     params.insert("extras", "geo, tags, machine_tags, o_dims, views");
     params.insert("single_photo", "true");
+    params.insert("include_self", "1");
 #ifdef LITE
     params.insert("count", "5" );
 #else
@@ -285,8 +286,7 @@ void FlickrManager::methodCallDone(const QString & reply, int callId)
         emit textSearchUpdated(reply);
         break;
 
-    case SearchLocation:
-        qDebug() << reply;
+    case SearchLocation:        
         emit locationSearchUpdated(reply);
         break;
 
@@ -345,8 +345,8 @@ void FlickrManager::searchLocation(qreal longitude, qreal latitude, int page)
     FlickrParameters params;
     params.insert("per_page", "20");
     params.insert("page", QString::number(page));
-    params.insert("lon", QString::number(longitude));//"22.28");//
-    params.insert("lat", QString::number(latitude));//"60.45");//
+    params.insert("lon", QString::number(longitude));
+    params.insert("lat", QString::number(latitude));
     params.insert("min_taken_date","2000-01-01+0:00:00");
     params.insert("radius", "20");
     params.insert("has_geo", "1");

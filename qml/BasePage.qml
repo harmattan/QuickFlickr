@@ -7,6 +7,7 @@ Page{
     tools: navigationTools
     property bool showNoContent: false
     property alias noContentText: noContentTextArea.text
+    //orientationLock: PageOrientation.LockPortrait
 
     function handleStatusText(xmlListModel, title)
     {
