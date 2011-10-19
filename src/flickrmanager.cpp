@@ -104,6 +104,7 @@ void FlickrManager::getLatestContactUploads()
     FlickrParameters params;
     params.insert("extras", "geo, tags, machine_tags, o_dims, views");
     params.insert("single_photo", "true");
+    params.insert("include_self","1");
 #ifdef LITE
     params.insert("count", "5" );
 #else

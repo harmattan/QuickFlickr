@@ -18,7 +18,7 @@
  *  along with QuickFLickr.  If not, see <http://www.gnu.org/licenses/>.
  */
 import QtQuick 1.1
-import com.meego 1.0
+import com.nokia.meego 1.0
 
 PageStackWindow {
     id: appWindow
@@ -57,13 +57,13 @@ PageStackWindow {
     }
 
 
-
-    ToolBarLayout {
+     ToolBarLayout {
             id: navigationTools
-            visible: appWindow.started
+            visible: (appWindow.started && settings.portrait)
              NavigationBar{
                  id: bottomBar
                  //focus: true
+                 visible: settings.portrait //This is a workaround for Qt Components weird behavior
 
                  onItemSelected: {
                      if ( id == "startup"){
@@ -118,6 +118,7 @@ PageStackWindow {
                  }
              }
      }
+
 
 
     Page{

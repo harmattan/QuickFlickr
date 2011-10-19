@@ -18,7 +18,7 @@
  *  along with QuickFLickr.  If not, see <http://www.gnu.org/licenses/>.
  */
 import QtQuick 1.1
-import com.meego 1.0
+import com.nokia.meego 1.0
 
 BasePage {
     id: photostreamView
