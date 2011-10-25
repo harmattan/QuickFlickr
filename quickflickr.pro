@@ -138,7 +138,10 @@ OTHER_FILES += \
     qml/AvatarWithTextDelegate.qml \
     qml/PatchIcon.qml \
     qml/LoadingIndicatorBox.qml \
-    qml/SearchView.qml
+    qml/SearchView.qml \
+    qml/LocationView.qml \
+    qml/LocationModel.qml \
+    qml/MapView.qml
 
 
 OTHER_FILES += \
@@ -167,6 +170,11 @@ qtcAddDeployment()
 #contains(DEFINES, LITE) {
 #    system(cp gfx/quickflickr-lite.png ./quickflickr.png)
 #}
+
+
+
+
+
 
 
 

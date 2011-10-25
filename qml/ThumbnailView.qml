@@ -105,7 +105,7 @@ Item{
         opacity: loading ?0.2:1
         cacheBuffer: 800
         onMovementEnded: loadMore();
-
+        Behavior on opacity {NumberAnimation{duration: 800}}
     }
 
     Loading{

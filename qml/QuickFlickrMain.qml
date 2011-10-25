@@ -109,9 +109,12 @@ PageStackWindow {
 
                          appWindow.showPage(searchview,5);
                      }
+                     if ( id =="location"){
+                         appWindow.showPage(locationview,6);
+                     }
                      else
                      if ( id == "settings" ){
-                        appWindow.showPage(settingsview,6);
+                        appWindow.showPage(settingsview,7);
                      }
 
 
@@ -304,6 +307,19 @@ PageStackWindow {
         }
     }
 
+    LocationView{
+        id: locationview
+        onItemClicked: {
+            mapview.currentPos = locationview.currentPosition;
+            mapview.currentItemIndex = index;
+            //mapview.startIndex = index;
+            appWindow.showPage(mapview,6);
+        }
+    }
+
+    MapView{
+        id: mapview
+    }
 
     SettingsView{
         id: settingsview

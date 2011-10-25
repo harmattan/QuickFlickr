@@ -99,7 +99,7 @@ public:
 
     Q_INVOKABLE void searchFreeText( const QString & text, int page, bool ownPhotosOnly);
 
-    Q_INVOKABLE void searchLocation(int longnitude, int latitude, int page);
+    Q_INVOKABLE void searchLocation(qreal longitude, qreal latitude, int page);
 
     Q_INVOKABLE void getInterestingness(int page);
 
@@ -124,6 +124,7 @@ Q_SIGNALS:
     void photoFavoritesUpdated( const QString & xml);
     void tagSearchUpdated( const QString & xml);
     void textSearchUpdated( const QString & xml);
+    void locationSearchUpdated(const QString & xml);
     void interestingnessUpdated( const QString & xml);
     void verifierRequired();
     void verificationFailure();

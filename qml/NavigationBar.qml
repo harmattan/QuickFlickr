@@ -61,6 +61,10 @@ Item{
              strId: "search"
          }
          ListElement {
+             name: "Where am I?"
+             strId: "location"
+         }
+         ListElement {
              name: "Settings & About"
              strId: "settings"
          }
