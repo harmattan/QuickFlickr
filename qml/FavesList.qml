@@ -33,6 +33,7 @@ Item{
             {
                 console.log("Fave date: " +utils.formattedTime(parseInt(favedate), "dd.MM.yyyy"));
                  return utils.formattedTime(parseInt(favedate), "dd.MM.yyyy");
+                //return utils.formattedElapsedTime(parseInt(favedate));
             }
 
             source:   "http://www.flickr.com/buddyicons/"+nsid+".jpg"

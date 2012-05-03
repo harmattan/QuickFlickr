@@ -1,7 +1,15 @@
+quickflickr (1.6.0) unstable; urgency=low
+
+  * Where am I view added
+  * Faster startup
+  * Error dialog shown in a case of network error
+
+ -- Marko Mattila <marko.mattila@d-pointer.com>  Wed, 18 Nov 2011 21:19:56 +0300
+
 quickflickr (1.5.0) unstable; urgency=low
 
   * Fixed a toolbar bug caused by N950 firmware update.
-  * Changed import com.meego to com.nokia.meego
+  * Changed import com.nokia.meego to com.nokia.meego
 
  -- Marko Mattila <marko.mattila@d-pointer.com>  Wed, 19 Oct 2011 21:19:56 +0300
 

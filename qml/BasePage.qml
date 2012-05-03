@@ -55,6 +55,12 @@ Page{
         anchors.fill: parent
         color: settings.defaultBackgroundColor
     }
+    /*
+    Image{
+        anchors.fill: parent
+        source: "qrc:///gfx/background.png"
+    }
+    */
 
     NoContentText{
         id: noContentTextArea

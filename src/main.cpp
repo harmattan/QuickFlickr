@@ -17,14 +17,27 @@
  *  You should have received a copy of the GNU Lesser General Public License
  *  along with QuickFLickr.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+#include <MDeclarativeCache>
+#include <QDeclarativeView>
+#include <QDeclarativeContext>
+#include <QScopedPointer>
 #include <QApplication>
-#include "qmlloader.h"
+//#include "qmlloader.h"
 #include <QtDebug>
+#include "flickrmanager.h"
+#include "utils.h"
+#include "settings.h"
+
 
 Q_DECL_EXPORT int main(int argc, char *argv[])
 {
-    QApplication app(argc, argv);
-    app.setDoubleClickInterval(500);
+
+    //QApplication app(argc, argv);
+
+    QScopedPointer<QApplication> app(MDeclarativeCache::qApplication(argc, argv));
+    QScopedPointer<QDeclarativeView> window(MDeclarativeCache::qDeclarativeView());
+    app->setDoubleClickInterval(500);
 
     QCoreApplication::setOrganizationName("d-pointer");
 #ifdef LITE
@@ -34,19 +47,23 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 #endif
 
     Q_INIT_RESOURCE(quickflickr);
-    
+
+    FlickrManager flickrManager;
+    Settings settings;
+
+    // Expose the C++ interface to QML
+    window->rootContext()->setContextProperty("flickrManager", &flickrManager );
+    window->rootContext()->setContextProperty("qfStore", &settings );
+    window->rootContext()->setContextProperty("utils", Utils::instance() );
+
+    window->setSource(QUrl("qrc:///qml/qml/QuickFlickrMain.qml"));
+    flickrManager.activate();
     // Simple loader for loading QML files
-    QmlLoader loader;
+    //QmlLoader loader;
 
-    // Platform specific stuff. Not so nice, but should work
-    //app.setGraphicsSystem("raster");
-    loader.showFullScreen();
-    return app.exec();
-
-#if defined(Q_WS_MAC) || defined(Q_WS_X11)
-        loader.resize(360,640);
-        loader.show();
-        return app.exec();
-#endif
+    // Platform specific stuff. Not so nice, but should work    
+    //loader.showFullScreen();
+    window->showFullScreen();
+    return app->exec();
 
 }

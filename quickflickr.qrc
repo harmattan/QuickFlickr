@@ -80,5 +80,6 @@
         <file>gfx/play-large.png</file>
         <file>gfx/play-small.png</file>
         <file>gfx/map_pin.png</file>
+        <file>gfx/background.png</file>
     </qresource>
 </RCC>

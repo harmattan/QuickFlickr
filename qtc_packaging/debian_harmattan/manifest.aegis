@@ -1,0 +1,8 @@
+<aegis>
+        <request policy="add">
+                <!-- My first application from this binary package needs only Location credential -->
+                <credential name="Location" />
+
+                <for path="/opt/quickflickr/bin/quickflickr" />
+        </request>
+</aegis>

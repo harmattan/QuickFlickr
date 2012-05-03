@@ -46,6 +46,7 @@ Q_SIGNALS:
     void methodCallDone(const QString & reply, int callId);
     void authenticationError();
     void verificationFailure();
+    void networkError();
 
 public Q_SLOTS:
     void setVerifier(const QString verifier);

@@ -128,6 +128,7 @@ Q_SIGNALS:
     void interestingnessUpdated( const QString & xml);
     void verifierRequired();
     void verificationFailure();
+    void networkError();
 
 private Q_SLOTS:            
     void authenticationDone();

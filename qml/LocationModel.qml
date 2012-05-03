@@ -5,6 +5,7 @@ XmlListModel{
     XmlRole { name: "owner"; query: "@owner/string()" }
     XmlRole { name: "title"; query: "@title/string()" }
     XmlRole { name: "url_s"; query: "@url_s/string()" }
+    XmlRole { name: "url_m"; query: "@url_m/string()" }
     XmlRole { name: "ownername"; query: "@ownername/string()" }
     XmlRole { name: "photoid"; query: "@id/string()" }
     XmlRole { name: "media"; query: "@media/string()" }

@@ -67,7 +67,7 @@ void FlickrManager::activate()
     connect(d->m_qtFlickr, SIGNAL(authenticationDone()),this,SIGNAL(proceed()));
     connect(d->m_qtFlickr, SIGNAL(verifierRequired()),this, SIGNAL(verifierRequired()));
     connect(d->m_qtFlickr, SIGNAL(verificationFailure()),this, SIGNAL(verificationFailure()));
-
+    connect(d->m_qtFlickr, SIGNAL(networkError()),SIGNAL(networkError()));
 
     if(d->m_qtFlickr->isAuthenticated()){        
         emit proceed();        
@@ -102,7 +102,7 @@ void FlickrManager::getLatestContactUploads()
 {
     Q_D(FlickrManager);
     FlickrParameters params;
-    params.insert("extras", "geo, tags, machine_tags, o_dims, views");
+    //params.insert("extras", "geo, tags, machine_tags, o_dims, views");
     params.insert("single_photo", "true");
     params.insert("include_self","1");
 #ifdef LITE
@@ -238,11 +238,12 @@ void FlickrManager::methodCallDone(const QString & reply, int callId)
         emit contactsUpdated(reply);
         break;
 
-    case GetPhotosOfContact:        
+    case GetPhotosOfContact:
         emit photostreamUpdated(reply);
         break;
 
-    case GetRecentActivity:        
+    case GetRecentActivity:
+        qDebug() << reply;
         emit recentActivityUpdated(reply);
         break;
 

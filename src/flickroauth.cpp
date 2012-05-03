@@ -54,6 +54,11 @@ FlickrOAuthPrivate::FlickrOAuthPrivate(FlickrOAuth * parent):
 void FlickrOAuthPrivate::onRequestReady(QByteArray response,int id)
 {
     Q_Q(FlickrOAuth);        
+    if ( response.isEmpty()){
+        qWarning() << "onRequestReady: empty response";
+        emit q->networkError();
+        return;
+    }
     emit q->methodCallDone(QString::fromUtf8(response.data()), id);
 }
 
@@ -175,7 +180,8 @@ FlickrOAuth::FlickrOAuth(const QString &key, const QString &secret):
     d->m_secret = secret;
     //d->m_oauthRequest->setEnableDebugOutput(true);
 
-
+    connect(d->m_oauthRequest,SIGNAL(requestTimedout()),
+            this,SIGNAL(networkError()),Qt::UniqueConnection);
     connect(d->m_oauthManager, SIGNAL(authorizedRequestReady(QByteArray,int)),
             d, SLOT(onRequestReady(QByteArray,int)), Qt::UniqueConnection);
 
@@ -234,7 +240,7 @@ bool FlickrOAuth::callMethod(const QString &method, bool useUserId,  int callId,
     Q_D(FlickrOAuth);    
     d->m_oauthRequest->clearRequest();
     d->m_oauthRequest->initRequest(KQOAuthRequest::AuthorizedRequest, QUrl("http://api.flickr.com/services/rest/"));
-    d->m_oauthRequest->setTimeout(0);
+    d->m_oauthRequest->setTimeout(30000);
     d->m_oauthRequest->setConsumerKey(d->m_key);
     d->m_oauthRequest->setConsumerSecretKey(d->m_secret);
     d->m_oauthRequest->setToken(d->m_oauthSettings.value(OAUTH_TOKEN).toString());

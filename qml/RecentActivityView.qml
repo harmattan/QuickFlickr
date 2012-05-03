@@ -7,6 +7,7 @@ BasePage{
     signal getComments( string photoId, url photoUrl)
     property bool isModelUpdated: false
     property int currentItemIndex: 0
+    noContentText: "Loading Activities"
 
     function defaultState()
     {

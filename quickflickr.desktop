@@ -4,7 +4,7 @@ Version=1.0
 Type=Application
 Terminal=false
 Name=QuickFlickr
-Exec=invoker --single-instance --type=d /opt/quickflickr/bin/quickflickr
+Exec=invoker --splash=/usr/share/quickflickr/Splash.png --single-instance --type=d /opt/quickflickr/bin/quickflickr
 Icon=/usr/share/icons/hicolor/64x64/apps/quickflickr.png
 X-Window-Icon=
 X-HildonDesk-ShowInToolbar=true

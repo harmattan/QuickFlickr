@@ -46,6 +46,7 @@ Item{
             source: "http://www.flickr.com/buddyicons/"+author+".jpg"
             headerText: authorname
             text: utils.formattedTime(datecreate, "dd MMM yy hh:mm") + "<br>"+comment
+            //text: "<i>"+utils.formattedElapsedTime(datecreate, "dd MMM yy hh:mm") + "</u><br>"+comment
         }
     }
 

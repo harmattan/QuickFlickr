@@ -41,9 +41,9 @@ Item{
         elide:  Text.ElideRight
         anchors.left: buddyIcon.right
         anchors.leftMargin: settings.mediumMargin
-        anchors.top: background.top
+        anchors.top: parent.top
         anchors.topMargin:  settings.smallMargin
-        anchors.right:  background.right
+        anchors.right:  parent.right
     }
     Label{
         id: text

@@ -23,13 +23,13 @@ import com.nokia.meego 1.0
 BasePage{
     id: timelineView
     signal thumbnailClicked( string photoId, url photoUrl, string owner )
-    noContentText: "No Uploads"
+    noContentText: "Loading Uploads"
     property int currentItemIndex: 0
 
     ContactUploadsModel{
         id: timelineModel
         onStatusChanged: {
-            timelineView.handleStatusText(timelineModel, "Uploads");
+            timelineView.handleStatusText(timelineModel, "Uploads");            
         }
     }
 

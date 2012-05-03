@@ -1,7 +1,7 @@
 import QtQuick 1.1
 import QtMobility.location 1.2
 
-import com.meego 1.0
+import com.nokia.meego 1.0
 
 BasePage {
     id: rootLocationView
@@ -9,39 +9,84 @@ BasePage {
     property int currentPageIndex: 1
     property int lastPageIndex: 1
     property bool loading: false
+    property bool clearView: true
     property Coordinate currentPosition: positionSource.position.coordinate
     property Coordinate clickedImagePosition: click
     property Coordinate lastPos
     noContentText: "Searching..."
-
+    onCurrentPageIndexChanged: console.log("Current page index: " + currentPageIndex)
     Coordinate{
         id: click
     }
 
+    function showClickedItem(index)
+    {
+        clearView = false;
+        itemClicked(index);
+    }
 
     onStatusChanged: {
         if ( status == PageStatus.Active){
             positionSource.active = true;
-        }else{
+            console.log("Loading LocationView");
+        }
+
+        if ( status == PageStatus.Inactive ){
+            console.log("Unloading LocationView");
             positionSource.active = false;
-            //positionSource.loaded = false;
+            if (clearView){
+                positionSource.firstRun = true;
+                positionSource.lastLat = 0.0;
+                positionSource.lastLon = 0.0;
+                rootLocationView.currentPageIndex = 1;
+                rootLocationView.clearView = false;
+            }
         }
     }
 
+
+
     PositionSource {
         id: positionSource
-        updateInterval: 5000
-        property bool loaded: false
+        updateInterval: 30000
+        property real lastLon: 0.0
+        property real lastLat: 0.0
+        property bool firstRun: true
+
+        function distance(lat1, lon1, lat2, lon2)
+        {
+            var R = 6371; // km
+            var d = Math.acos(Math.sin(lat1)*Math.sin(lat2) +
+                              Math.cos(lat1)*Math.cos(lat2) *
+                              Math.cos(lon2-lon1)) * R;
+            console.log("Distance: " + d);
+            return d;
+        }
 
         onPositionChanged: {
             if (position.longitudeValid &&
                 position.latitudeValid){
 
-                if (!loaded){
+
+                if ( firstRun){
+                    lastLat = position.coordinate.latitude;
+                    lastLon = position.coordinate.longitude;
+                    firstRun = false;
                     flickrManager.searchLocation(position.coordinate.longitude,
                                                  position.coordinate.latitude, 1);
                     loading = true;
-                    loaded = true;
+                    return;
+                }
+
+                if ( distance(lastLat, lastLon, position.coordinate.latitude,
+                              position.coordinate.longitude) > 3){
+
+                    flickrManager.searchLocation(position.coordinate.longitude,
+                                                 position.coordinate.latitude, 1);
+                    loading = true;
+                    lastLat = position.coordinate.latitude;
+                    lastLon = position.coordinate.longitude;
+                    rootLocationView.currentPageIndex = 1;
                 }
             }
         }
@@ -56,6 +101,7 @@ BasePage {
             if (status == XmlListModel.Ready){
                 lastPageIndex = utils.lastPageIndex(locationModel.xml);
                 loading = false;
+                console.log("Model count " + locationModel.count);
             }
         }
     }
@@ -78,11 +124,11 @@ BasePage {
             font.bold: true
         }
         Label{
-            text: "Latitude: " +positionSource.position.coordinate.latitude
+            text: "Latitude: " + (positionSource.position.latitudeValid?positionSource.position.coordinate.latitude: "...")
             color: "white"
         }
         Label{
-            text: "Longitude: " +positionSource.position.coordinate.longitude
+            text: "Longitude: " +(positionSource.position.longitudeValid?positionSource.position.coordinate.longitude: "...")
             color: "white"
         }
     }
@@ -133,7 +179,7 @@ BasePage {
         anchors.bottom: parent.bottom
         loading: locationModel.status != XmlListModel.Ready
         model: locationModel
-        onClicked: rootLocationView.itemClicked(index);
+        onClicked: rootLocationView.showClickedItem(index);
         onLoadNextThumbnails: rootLocationView.loadNext()
         onLoadPreviousThumbnails: rootLocationView.loadPrevious()
 

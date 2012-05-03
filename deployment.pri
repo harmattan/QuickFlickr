@@ -55,6 +55,7 @@ symbian {
         desktopfile.path = /usr/share/applications/hildon
     } else {
         desktopfile.path = /usr/share/applications
+
         copyCommand =
         for(deploymentfolder, DEPLOYMENTFOLDERS) {
             source = $$MAINPROFILEPWD/$$eval($${deploymentfolder}.source)
@@ -95,14 +96,18 @@ symbian {
     }
     icon.files = $${TARGET}.png
     icon.path = /usr/share/icons/hicolor/64x64/apps
+    splashimage.files = Splash.png
+    splashimage.path = /usr/share/quickflickr/
     desktopfile.files = $${TARGET}.desktop
     target.path = $${installPrefix}/bin
     export(icon.files)
     export(icon.path)
     export(desktopfile.files)
     export(desktopfile.path)
+    export(splashimage.files)
+    export(splashimage.path)
     export(target.path)
-    INSTALLS += desktopfile icon target
+    INSTALLS += desktopfile icon target splashimage
 }
 
 export (ICON)

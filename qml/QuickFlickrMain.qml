@@ -24,7 +24,7 @@ PageStackWindow {
     id: appWindow
 
     Settings{ id: settings }
-    initialPage: splash
+    //initialPage: splash
     color: "black"
     showStatusBar: false
     showToolBar: (settings.portrait && appWindow.started)
@@ -46,12 +46,13 @@ PageStackWindow {
         onProceed: {flickrManager.getLatestContactUploads(); timer.start(); console.log("QML Authentication done")}
         onAuthenticationRequired: appWindow.showPage(authenticationview, 0);
         onFeatureDisabled: { myDialog.open()}
+        onNetworkError: errorDialog.open()
     }
 
 
     Timer{
         id: timer
-        interval: 4000
+        interval: 10
         running:  false
         onTriggered: {appWindow.pageStack.push(timelineview); appWindow.started = true;}
     }
@@ -358,4 +359,37 @@ PageStackWindow {
          }
     }
 
+    Dialog {
+       id: errorDialog
+       title: Label{
+           text: "Network Error!";
+           color: "white"
+           font.pixelSize: settings.largeFontSize
+           font.bold: true
+           width: settings.width
+           wrapMode: Text.WordWrap
+           anchors.horizontalCenter: parent.horizontalCenter
+           anchors.bottomMargin: settings.hugeMargin
+       }
+
+       content: Item{
+                width: settings.pageWidth * 0.7
+                height: 50
+                anchors.centerIn: parent
+                Text {
+                   anchors.centerIn: parent
+                   anchors.margins: settings.hugeMargin
+                   color: "white"
+                   text: "You should try to run QuickFlickr later!"
+                   wrapMode: Text.WordWrap
+                   font.pixelSize: settings.mediumFontSize * 1.2
+                }
+       }
+
+       buttons: ButtonRow {
+         style: ButtonStyle { }
+           anchors.horizontalCenter: parent.horizontalCenter
+           Button {text: "OK"; onClicked: errorDialog.accept()}
+         }
+    }
 }

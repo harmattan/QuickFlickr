@@ -27,6 +27,52 @@ QString Utils::formattedTime( qint64 seconds, const QString & format) const
     return dt.toString(format);
  }
 
+QString Utils::formattedElapsedTime(qint64 seconds) const
+{
+
+    QDateTime dt = QDateTime::fromTime_t(seconds);
+    QDateTime ct = QDateTime::currentDateTime();
+    ct.setTimeSpec(Qt::UTC);
+    int elapsedDays = dt.daysTo(ct);
+
+
+    if ( elapsedDays == 0 ){
+        QTime t = dt.time();
+        int hours = t.hour();
+        int minutes = t.minute();
+        if ( hours > 1 ){
+            return QString("%1 hours ago").arg(hours);
+        }
+        if (hours == 1){
+            return QString("%1 hour ago").arg(hours);
+        }
+        if (hours < 0){
+            return QString("%1 minutes ago").arg(minutes);
+        }
+    }
+
+    if ( elapsedDays <= 14){
+        if (elapsedDays == 1){
+            return QString("%1 day ago").arg(elapsedDays);
+        }
+        return QString("%1 days ago").arg(elapsedDays);
+    }
+
+    if ( 14 < elapsedDays && elapsedDays < 30){
+        return QString("%1 weeks ago").arg(elapsedDays/7);
+    }
+
+    if (elapsedDays >= 30 && elapsedDays < 60){
+        return QString("%1 months ago").arg(elapsedDays/30);
+    }
+
+    if (elapsedDays >= 60){
+        return QString("%1 months ago").arg(elapsedDays/30);
+    }
+
+    return QString("%1 days ago").arg(elapsedDays);
+}
+
 int Utils::lastPageIndex(const QString & xml)
 {
     // This is ugly, but it's damn easy to get just a single value from xml

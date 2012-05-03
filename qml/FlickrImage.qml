@@ -28,6 +28,7 @@ Item{
     property alias imageScale: background.scale
     property bool showBorder: true
     property bool showLoader: true
+    property bool showScale: true
     property int  borderWidth: 2
     signal clicked
     signal pressAndHold
@@ -41,7 +42,7 @@ Item{
         border.width: showBorder? borderWidth:0
         border.color: showBorder?"white":color
         smooth: true
-        scale:  0
+        scale:  showScale?0:1
         Image{
             id: image            
             anchors.fill: parent
@@ -70,7 +71,7 @@ Item{
     states: [
         State {
             name: "Show"; 
-            when: image.status == Image.Ready            
+            when: image.status == Image.Ready && showScale
             PropertyChanges { target: background; scale: 1 }
         }
     ]    
