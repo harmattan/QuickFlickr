@@ -1,5 +1,5 @@
-import QtQuick 1.0
-import com.nokia.meego 1.0
+import QtQuick 1.1
+import com.nokia.meego 1.1
 
 Page{
     width: settings.pageWidth
@@ -7,7 +7,8 @@ Page{
     tools: navigationTools
     property bool showNoContent: false
     property alias noContentText: noContentTextArea.text
-    //orientationLock: PageOrientation.LockPortrait
+    orientationLock: PageOrientation.LockPortrait
+
 
     function handleStatusText(xmlListModel, title)
     {

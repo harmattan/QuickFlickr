@@ -18,17 +18,18 @@
  *  along with QuickFLickr.  If not, see <http://www.gnu.org/licenses/>.
  */
 import QtQuick 1.1
-import com.nokia.meego 1.0
+import com.nokia.meego 1.1
 
 PageStackWindow {
     id: appWindow
 
-    Settings{ id: settings }
-    //initialPage: splash
+    Settings{ id: settings }    
     color: "black"
     showStatusBar: false
-    showToolBar: (settings.portrait && appWindow.started)
+    showToolBar: inPortrait//(settings.portrait && appWindow.started)
     property bool started:  false
+
+    onShowToolBarChanged: console.log("Show TB: " + showToolBar)
 
     function showPage(pageid, index)
     {
@@ -58,13 +59,13 @@ PageStackWindow {
     }
 
 
-     ToolBarLayout {
-            id: navigationTools
-            visible: (appWindow.started && settings.portrait)
+    ToolBarLayout {
+            id: navigationTools            
+            scale: (appWindow.started && settings.portrait)?1:0
+            Behavior on scale{ NumberAnimation { duration:200}}
+
              NavigationBar{
                  id: bottomBar
-                 //focus: true
-                 visible: settings.portrait //This is a workaround for Qt Components weird behavior
 
                  onItemSelected: {
                      if ( id == "startup"){

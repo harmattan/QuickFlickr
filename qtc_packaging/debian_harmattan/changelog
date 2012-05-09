@@ -1,3 +1,9 @@
+quickflickr (1.7.0) unstable; urgency=low
+  * Landscape mode disabled because toolbar can't be hidden if using custom element
+    in it.
+
+ -- Marko Mattila <marko.mattila@d-pointer.com>  Wed, 09 May 2012 23:14:29 +0300
+
 quickflickr (1.6.0) unstable; urgency=low
 
   * Where am I view added
